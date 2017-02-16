@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Beendroid</string>
+    <string name="message">Watch face tapped</string>
+    <string name="my_analog_name">BEEndroid</string>
+    <string name="complication_simple_config_name">Configuration</string>
+    <string name="hive_id_label">Hive Id</string>
+</resources>

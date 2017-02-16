@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="droidzilla.com.beendroid">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <!-- Required to act as a custom watch face. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application android:allowBackup="true" android:icon="@drawable/greutate"
+        android:label="@string/app_name" android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault">
+
+        <service
+            android:name=".HiveWeightComplicationProviderService"
+            android:icon="@drawable/greutate"
+            android:label="Hive Weight" android:supportsRtl="true"
+            android:theme="@android:style/Theme.DeviceDefault"
+            android:permission="com.google.android.wearable.permission.BIND_COMPLICATION_PROVIDER">
+            <intent-filter>
+                <action android:name="android.support.wearable.complications.ACTION_COMPLICATION_UPDATE_REQUEST"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.wearable.complications.PROVIDER_CONFIG_ACTION"
+                android:value="com.droidzilla.beendroid.hive.complication.CONFIG_COMPLICATION_ACTIVITY"/>
+
+            <meta-data
+                android:name="android.support.wearable.complications.SUPPORTED_TYPES"
+                android:value="SHORT_TEXT"/>
+            <meta-data
+                android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
+                android:value="30"/>
+        </service>
+        <service
+            android:name=".UpdateComplicationDataService"
+            android:exported="false">
+        </service>
+        <activity
+            android:name=".HiveComplicationConfigActivity"
+            android:label="Beendroid Hive COnfig">
+            <intent-filter>
+                <action android:name="com.droidzilla.beendroid.hive.complication.CONFIG_COMPLICATION_ACTIVITY"/>
+                <category android:name="android.support.wearable.complications.category.PROVIDER_CONFIG"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>
